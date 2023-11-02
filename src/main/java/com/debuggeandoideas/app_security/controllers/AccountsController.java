@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/accounts")
 public class AccountsController {
 	
+	
+	/***ESTO SE USA CUANDO EL PROYECTO ES GRANDE Y HAY MAS RUTAS DE LAS DEBIDAS PARA CONFIGURAR****/
+	//@PreAuthorize("hasAnyAuthority('VIEW_ACCOUNT','VIEW_CARDS')")
 	@GetMapping
 	public Map<String, String> accounts(){
 		//business logic

@@ -2,10 +2,16 @@ package com.debuggeandoideas.app_security.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -20,6 +26,7 @@ public class CustomerEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private BigInteger id;
 	
 	private String email;
@@ -27,8 +34,10 @@ public class CustomerEntity implements Serializable{
 	@Column(name = "pwd")
 	private String password;
 	
-	@Column(name = "rol")
-	private String role;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_customer")
+	private List<RoleEntity> roles;
+	
 
 	public BigInteger getId() {
 		return id;
@@ -54,12 +63,12 @@ public class CustomerEntity implements Serializable{
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
+	public List<RoleEntity> getRoles() {
+		return roles;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
 	}
 
 }
